@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(int)getEndTime;
 -(void)setTripDuration:(int)duration;
 -(int)getTripDuration;
--(int)CalculateTrip:(int)begTime end:(int)endTime;
+-(int)CalculateTrip:(int)bgTime end:(int)edTime;
 -(bool)tripInvalid;
 -(void)setInitVelocity:(double)velocity;
 -(double)getInitVelcocity;

@@ -9,12 +9,10 @@
     customer = ncustomer;
     return self;
 }
--(void)setCustomer:(int)ncustomer{
-    customer = ncustomer;
-}
--(int)getCustomer{
-    return customer;
-}
+
+-(void)setCustomer:(int)ncustomer{customer = ncustomer;}
+-(int)getCustomer{return customer;}
+
 -(void)setCost{
     int start = [self getBegTime:getHour*60] + [self getBegTime:getMinute];
     for(int i = 0; i < [self getTripDuration] ; i++){
@@ -35,45 +33,27 @@
         }
     }
 }
--(double)getCost{
-    return cost;
-}
+-(double)getCost{return cost;}
 
--(void)setHour:(int)input{
-    hour = input;
-}
--(int)getHour{
-    return hour;
-}
--(void)setMinute:(int)input{
-    minute = input;
-}
--(int)getMinute{
-    return minute;
-}
--(void)setBegTime:(int)time{
-    begTime = time;
-}
--(int)getBegTime{
-    return begTime;
-}
--(void)setEndTime:(int)time{
-    endTime = time;
-}
--(int)getEndTime{
-    return endTime;
-}
--(void)setTripDuration:(int)duration{
-    tripDuration = duration;
-}
+-(void)setHour:(int)input{hour = input;}
+-(int)getHour{return hour;}
 
--(int)getTripDuration{
-    return tripDuration;
-}
--(int)CalculateTrip:(int)begTime end:(int)endTime{
+-(void)setMinute:(int)input{minute = input;}
+-(int)getMinute{return minute;}
+
+-(void)setBegTime:(int)time{begTime = time;}
+-(int)getBegTime{return begTime;}
+
+-(void)setEndTime:(int)time{endTime = time;}
+-(int)getEndTime{return endTime;}
+
+-(void)setTripDuration:(int)duration{tripDuration = duration;}
+-(int)getTripDuration{return tripDuration;}
+
+-(int)CalculateTrip:(int)bgTime end:(int)edTime{
     double count = 0;
-    double beginning = [begTime getHour]*60 + [begTime getMinute];
-    double end = [endTime getHour ]*60 + [endTime getMinute];
+    double beginning = [bgTime getHour]*60 + [bgTime getMinute];
+    double end = [edTime getHour ]*60 + [edTime getMinute];
     
     if(beginning < end){
         count = end - beginning;
@@ -83,12 +63,8 @@
     return count;
 }
 
--(void)setInitVelocity:(double)velocity{
-    initVelocity = velocity;
-}
--(double)getInitVelcocity{
-    return initVelocity;
-}
+-(void)setInitVelocity:(double)velocity{initVelocity = velocity;}
+-(double)getInitVelcocity{return initVelocity;}
 
 -(bool)tripInvalid{
     if((double)tripDuration < 720){

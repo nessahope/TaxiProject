@@ -12,8 +12,7 @@ int mainMenu(){
     printf("3. Check meter \n");
     printf("0. Exit \n");
     scanf("%d",&input);
-    return input;
-}
+    return input;}
 int taximeter(){
     int input;
     printf("1. Net Income \n");
@@ -22,16 +21,12 @@ int taximeter(){
     printf("4. Total number of trips \n");
     printf("0. Exit \n");
     scanf("%d",&input);
-    return input;
-}
-
+    return input;}
 double dblFromUser(NSString *text){
     double userInput;
     printf("%s",[text UTF8String]);
     scanf("%lf",&userInput);
-    return userInput;
-}
-
+    return userInput;}
 void setTimesFromUser(NSString *text, Trip *time){
     int hour;
     int minute;
@@ -48,8 +43,10 @@ void setTimesFromUser(NSString *text, Trip *time){
         } @finally {
         }
         [time setHour:hour];
-    } while (!validInput);
-}
+    } while (!validInput);}
+
+
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
@@ -70,35 +67,27 @@ int main(int argc, const char * argv[]) {
                     Trip *newCustomer = [[Trip alloc]init];
                     
                     do {
-            
+                        printf("Please respect the 24hr clock. (ex 15hr = 3pm)");
                         setTimesFromUser(@"Please enter start time\n", beg);
                         setTimesFromUser(@"Please enter end time\n", end);
-                    
                         [newCustomer setBegTime:beg];
                         [newCustomer setEndTime:end];
-      
                         [newCustomer setTripDuration:[newCustomer CalculateTrip:[newCustomer getBegTime] end:[newCustomer getEndTime]]];
- 
                         if([newCustomer tripInvalid]){
                             printf("Invalid duration, the trip cannot exceed 12 hours\n");
+                            
                         }
                     } while ([newCustomer tripInvalid]);
                     
                 
                     Trip *newTrip = [[Trip alloc]initWithCustomer:newCustomer];
-                    
                     double velo = dblFromUser(@"Enter the initial speed(km/h) of the trip\n");
-
                     [newTrip setInitVelocity:velo];
-
                     [taxi setTrip:newTrip];
-        
                     [taxi gasUp];
                     
-                    // check fuel to see if it can complete it
                     if([taxi gasLow]){
                         [newTrip setCost];
-                        //calculate mileage and add it to the total mileage
                         [taxi calculateMiles];
                         [taxi setNetIncome:[taxi getNetIcome] + [newTrip getCost]];
                     }else{
@@ -113,22 +102,21 @@ int main(int argc, const char * argv[]) {
                     break;
                 case 3:{
                     bool taxMeter = true;
-                    printf("Taximeter functions\n");
+                    printf("Taximeter menu\n");
                     do {
-                        printf("Choose one of the following options\n");
                         int option = taximeter();
                         switch (option) {
                             case 1:
                                 printf("Your net income is: %lf \n", [taxi getNetIcome]);
                                 break;
                             case 2:
-                                printf("Your fuel level is: %lf \n", [taxi getGas]);
+                                printf("Your gas tank is at: %lf \n", [taxi getGas]);
                                 break;
                             case 3:
-                                printf("Your total mileage is: %lf \n", [taxi getMiles]);
+                                printf("Your total distance is: %lf \n", [taxi getMiles]);
                                 break;
                             case 4:
-                                printf("The number of trip is: %lu \n", [[taxi getTrip]count]);
+                                printf("The number of customer trips is: %lu \n", [[taxi getTrip]count]);
                                 break;
                             case 0:
                                 taxMeter = false;
@@ -148,9 +136,9 @@ int main(int argc, const char * argv[]) {
                 default:
                     printf("Option not available");
                     break;
-            }// end of switch
+            }// closes switch
         } while (exit);
-        printf("Exit app");
+        printf("Thank you!");
         
     }
     return 0;

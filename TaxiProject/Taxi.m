@@ -9,39 +9,24 @@
     return self;
 }
 
--(void)setGas:(float)litres{
-    gas = litres;
-}
+-(void)setGas:(float)litres{gas = litres;}
+-(float)getGas{return gas;}
 
--(float)getGas{
-    return gas;
-}
+-(void)setNetIncome:(double)income{netIncome = income;}
+-(double)getNetIcome{return netIncome;}
 
--(void)setNetIncome:(double)income{
-    netIncome = income;
-}
-
--(double)getNetIcome{
-    return netIncome;
-}
-
--(void)setMiles:(float)mileage{
-    miles = mileage;
-}
-
--(float)getMiles{
-    return miles;
-}
+-(void)setMiles:(float)mileage{miles = mileage;}
+-(float)getMiles{return miles;}
 
 -(void)calculateMiles{
     Trip *lastTrip = [[self getTrip]lastObject];
-    miles = miles + pow([lastTrip getInitVelcocity],2*([[lastTrip getCustomer]getTripDuration]/60.0)) - (lastTrip.getInitVelocity*([[lastTrip getCustomer]getTripDuration]/60.0));
+    miles = miles + pow([lastTrip getInitVelcocity],2*([[lastTrip getCustomer]getTripDuration]/60.0)) - ([lastTrip getInitVelocity]*([[lastTrip getCustomer]getTripDuration]/60.0));
 }
 
 -(NSMutableArray *)getTrip{
         Trips = [[NSMutableArray alloc]init];
-    return Trips;
-}
+    return Trips;}
+-(void)setTrip:(Trip*)customerTrip{[Trips addObject:customerTrip];}
 
 -(bool)gasLow{
         if(gas == 0){
@@ -53,18 +38,14 @@
         }
     }
 
--(void)setTrip:(Trip*)customerTrip{
-     [Trips addObject:customerTrip];
-}
-
 -(void)gasUp{
     double litres;
-    printf("Please enter how much you wold like to refuel\n");
+    printf("Please enter how much you would like to refuel\n");
     scanf("%lf",&litres);
     float price = randomNumber(1.45, 1.15);
-    printf("Your fare at this time is: %f per litre\n", price);
+    printf("Your cost is: %f per litre\n", price);
     if([self getNetIcome] < litres*price){
-        printf("Not enough funds for this operation\n");
+        printf("Not enough money to complete transaction\n");
     }else{
         [self setGas:[self getGas] + litres];
         [self setNetIncome: [self getNetIcome] - litres*price];

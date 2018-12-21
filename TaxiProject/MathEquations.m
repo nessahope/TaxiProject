@@ -6,16 +6,13 @@ double power(double base,int exp){
     double value = 1;
     for(int i = exp; i > 0; i--){
         value *= base;
-    }
-    return value;
-}
+    }return value;}
 
 double factorial(int num){
     double value = 1;
     for(int i=2; i<=num; i++ )
         value *= i;
-    return value;
-}
+    return value;}
 
 double cosine(double num){
     double value = 1.0;
@@ -26,8 +23,7 @@ double cosine(double num){
             value -=(power(num, i))/(factorial(i));
     }
     printf("%lf\n",value);
-    return value;
-}
+    return value;}
 
 double sine(double num){
     double value = 0.0;
@@ -36,26 +32,18 @@ double sine(double num){
             value +=(power(num, i))/(factorial(i));
         else if(i % 4 == 3)
             value -=(power(num, i))/(factorial(i));
-    }
-    return value;
-}
+    }return value;}
 
-double tangent(double num){
-    
-    return sine(num)/cosine(num);
-}
+double tangent(double num){return sine(num)/cosine(num);}
 
 double absolute(double num){
     if(num<0){
         num *= -1;
-    }
-    return num;
-}
+    }return num;}
 
 float randomNumber(float top , float bottom){
     srand((unsigned int) time(0));
     int num = rand();
     //double number = bottom + num * (top-bottom);
     float number =  fmod((bottom+num), top-bottom) + bottom;
-    return number;
-}
+    return number;}
